@@ -1,4 +1,4 @@
-NAME = OCF
+NAME = EX00
 
 SRCS = main.cpp Fixed.cpp
 OBJS = $(SRCS:.cpp=.o)

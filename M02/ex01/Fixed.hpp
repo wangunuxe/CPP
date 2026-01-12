@@ -1,36 +1,29 @@
 #ifndef FIXED_HPP
 # define FIXED_HPP
-
 # include <iostream>
+# include <cmath>
 
-class Fixed
+class	Fixed
 {
 private:
-    int _rawBits;
-    static const int _fractionalBits;
+	int	_rawBits;
+	static const int	_fractionalBits = 8;// the "static" requires that that the number of fractional bits must be shared by all obejcts, not stores per object. A non-static variable must be initialized in the constructor initilizer list.
 public:
-    Fixed();
-    Fixed(int const n);
-    Fixed(float const f);
+	Fixed();
+	Fixed(const int n);
+	Fixed(const float fn);
+	
+	Fixed(const Fixed& other);
+	Fixed& operator=(const Fixed& other);
+	~Fixed();
 
-    Fixed(const Fixed& other);
-    Fixed& operator=(const Fixed& other);
+	int		getRawBits(void) const;
+	void	setRawBits(int const raw);
 
-    ~Fixed();
+	float	toFloat(void) const;
+	int		toInt(void) const;
 
-    int getRawBits(void) const;
-    void setRawBits(int const raw);
-
-    float toFloat(void) const;
-    int toInt(void) const;
 };
 
-std::ostream& operator<<(std::ostream& out, const Fixed& f);
-
-#endif 
-
-// ***"<<" is a binary operator***
-//     **When you write: std::cout << a
-//       The compiler rewrites it as: operator<<(std::cout, a);
-// ***ixed(int const n)
-    // Fixed(int const n) is a constructor to initialize a Fixed object :  converts n into the fixed-point representation defined by the class and uses that representation to initialize the object’s internal state (_rawBits).
+std::ostream& operator<<(std::ostream& out, Fixed const& value);
+#endif

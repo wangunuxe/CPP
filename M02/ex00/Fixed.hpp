@@ -7,7 +7,7 @@ class Fixed
 {
 private:
 	int					_rawBits;
-	static const int	_fractionalBits;
+	static const int	_fractionalBits = 8;
 
 public:
 	// Orthodox Canonical Form
