@@ -1,8 +1,16 @@
 #include "Fixed.hpp"
 
-const int	_fractionalBits = 8;
-
 Fixed::Fixed() : _rawBits(0){};
+
+Fixed::Fixed(const int n)
+{
+	this->_rawBits = n << _fractionalBits;
+}
+
+Fixed::Fixed(const float fn)
+{
+	this->_rawBits = roundf(fn * (1 << _fractionalBits));
+}
 
 Fixed:: ~Fixed(){};
 
@@ -71,13 +79,69 @@ Fixed Fixed::operator*(const Fixed& other) const
 {
 	Fixed	res;
 	long tmp = (long)this->_rawBits * (long)other.getRawBits();// a * 2^8 * b * 2^8
-	res.setRawBits(tmp >> _fractionalBis);
+	res.setRawBits(tmp >> _fractionalBits);
 	return res;
 }
 Fixed Fixed::operator/(const Fixed& other) const
 {
 	Fixed	res;
-	res.setRawBits ((this->_rawBits << _fractionalBis) / other.getRawBits());
+	res.setRawBits ((this->_rawBits << _fractionalBits) / other.getRawBits());
 	return res;
 }
 
+//increment and decrement
+//Pre-increment returns a reference to the same object,
+Fixed& Fixed::operator++()//"++a" Modify first, return reference : T& operator++()
+{
+	this->_rawBits++;
+	return *this;
+}
+//Post-increment returns a copy (a new object): T operator++(int)
+Fixed Fixed::operator++(int)//"a++" Save old value first; next, Modify;
+{
+	Fixed tmp(*this);
+	this->_rawBits++;
+	return tmp;
+}
+
+Fixed& Fixed::operator--()
+{
+	this->_rawBits--;
+	return *this;
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed tmp(*this);
+	this->_rawBits--;
+	return tmp;
+}
+
+//min and max non-const version / const version
+Fixed&	Fixed::min(Fixed& a, Fixed& b)
+{
+	return (a < b ? a : b);
+}
+Fixed&	Fixed::max(Fixed& a, Fixed& b)
+{
+	return (a > b ? a : b);
+}
+const Fixed&	Fixed::min(const Fixed& a, const Fixed& b)
+{
+	return (a < b ? a : b);
+}
+const Fixed&	Fixed::max(const Fixed& a, const Fixed& b)
+{
+	return (a > b ? a : b);
+}
+
+float Fixed::toFloat() const
+{
+	return (float)_rawBits/ (1 << _fractionalBits);
+}
+
+std::ostream& operator<<(std::ostream& out, const Fixed& value)
+{
+	out <<value.toFloat();
+	return out;
+}
