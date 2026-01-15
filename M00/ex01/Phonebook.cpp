@@ -95,9 +95,9 @@ void	Phonebook :: searchContact()
 		std :: stringstream ss(input);
 		ss >> n;
 	}
-	std :: cout << "First name : " << truncate_string(contacts[n].getFirstName()) << std :: endl;
-	std :: cout << "Last name : " << truncate_string(contacts[n].getLastName()) << std :: endl;
-	std :: cout << "Nickname : " << truncate_string(contacts[n].getNickname()) << std :: endl;
-	std :: cout << "Phone number : " << truncate_string(contacts[n].getPhoneNumber()) << std :: endl;
-	std :: cout << "Darkest secret : " << truncate_string(contacts[n].getSecret()) << std :: endl;
+	std :: cout << "First name : " << contacts[n].getFirstName() << std :: endl;
+	std :: cout << "Last name : " << contacts[n].getLastName() << std :: endl;
+	std :: cout << "Nickname : " << contacts[n].getNickname() << std :: endl;
+	std :: cout << "Phone number : " << contacts[n].getPhoneNumber() << std :: endl;
+	std :: cout << "Darkest secret : " << contacts[n].getSecret() << std :: endl;
 }

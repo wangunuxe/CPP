@@ -8,7 +8,8 @@ class	Zombie
 private:
 	std::string name;
 public:
-	Zombie(std::string n);// The declaration of constructor is necessary, beacuse the name of a Zombie should not be a empty
+	Zombie();
+	Zombie(std::string n);
 	~Zombie();
 	void announce(void);
 };
