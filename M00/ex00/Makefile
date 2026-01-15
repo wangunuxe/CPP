@@ -1,17 +1,15 @@
-NAME = EX00
+NAME = megaphone
 
-SRCS = ClapTrap.cpp main.cpp
-OBJS = $(SRCS:.cpp=.o)
+SRCS = megaphone.cpp
+OBJS =$(SRCS:.cpp=.o)
 
-CXX=c++
+CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-all: $(NAME)
-
-$(NAME):$(OBJS)
+all : $(NAME)
+$(NAME) : $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
-
-%.o: %.cpp
+%.o:%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 clean:
 	rm -f $(OBJS)

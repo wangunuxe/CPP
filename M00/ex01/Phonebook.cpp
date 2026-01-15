@@ -6,22 +6,7 @@ Phonebook :: Phonebook()//The constuctor do NOT have a reture type, not even "vo
 	count = 0;
 	next_index = 0;
 }
-
-// int	isDigitPhoneNumber(std :: string input)
-// {
-// 	int i;
-// 	i = 0;
-// 	while (input[i])
-// 	{
-// 		if (std :: isdigit(input[i]) == false)
-// 		{
-// 			std :: cout << "The Phone number should be composed of digits." << std :: endl;
-// 			return (0);
-// 		}
-// 		i++;
-// 	}
-// 	return (1);
-// }
+Phonebook::~Phonebook() {};
 
 void	Phonebook :: addContact()//Normal member function need a return type
 {
@@ -54,14 +39,14 @@ void	Phonebook :: addContact()//Normal member function need a return type
 	input = "";
 	while (input.empty())
 	{
-		std :: cout << "Enter the phone numer : ";
+		std :: cout << "Enter the phone number : ";
 		std :: getline(std :: cin, input);
 	}
 	contacts[next_index].setPhoneNumber(input);
 	input = "";
 	while (input.empty())
 	{
-		std :: cout << "Enter the darkest serect : ";
+		std :: cout << "Enter the darkest secret : ";
 		std :: getline(std :: cin, input);
 	}
 	contacts[next_index].setSecret(input);

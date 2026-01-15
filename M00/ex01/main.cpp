@@ -11,16 +11,14 @@ int	main()
 
 	while (true)
 	{
-		std :: cout << "Please enter ADD or SEARCH or EXIT : ";
-		std :: getline(std :: cin, command);
+		std::cout << "Please enter ADD, SEARCH or EXIT: ";
+		if (!std::getline(std::cin, command))
+			break;//Ctrl + D
+
 		if (command == "ADD")
-		{
 			pb.addContact();
-		}
 		else if (command == "SEARCH")
-		{
 			pb.searchContact();
-		}
 		else if (command == "EXIT")
 			break;
 	}

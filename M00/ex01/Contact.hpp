@@ -12,12 +12,16 @@ private://data
     std :: string nickname;
     std :: string phone_number;
     std :: string darkest_secret;
-public://member function and i don't declare the constructor 
+public://member function and i don't declare the constructor
+	Contact();
+	~Contact();
+	
 	void	setFirstName(const std :: string &first_name);
 	void	setLastName(const std :: string &last_name);
 	void	setNickname(const std :: string &nickname);
 	void	setPhoneNumber(const std :: string &phone_number);
 	void	setSecret(const std :: string &darkest_secret);
+
     std :: string	getFirstName() const;
     std :: string	getLastName() const;
     std :: string	getNickname() const;

@@ -13,6 +13,8 @@ private :
 	int	next_index;// The next index of contact to fill or overwrite
 public:
 	Phonebook();// If a class contains primitive types (int, char, etc.), we should declare a constructor to initialize them. 
+	~Phonebook();
+	
 	void	addContact();
 	void	searchContact();
 
