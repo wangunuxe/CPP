@@ -30,48 +30,48 @@ std::string replaceLine(const std::string &line, const std::string &s1, const st
 	//2.len: Length of the sub-string
 int main(int argc, char **argv)
 {
-    if (argc != 4)
-    {
-        std::cerr <<"Usage:./sed filename s1 s2" << std::endl;
-        return 1;
-    }
-    std::string filename = argv[1];
+	if (argc != 4)
+	{
+		std::cerr <<"Usage:./sed filename s1 s2" << std::endl;
+		return 1;
+	}
+	std::string filename = argv[1];
 	std::string s1 = argv[2];
 	std::string s2 = argv[3];
 
 	if (s1.empty())
 	{
 		std::cerr << "Error: s1 cannot be empty" << std::endl;
-        return 1;
+		return 1;
 	}
 
 	std::ifstream infile(filename.c_str());
 	if(!infile)
 	{
 		std::cerr << "Error: cannot open input file" << std::endl;
-        return 1;
+		return 1;
 	}
-    std::ofstream outfile((filename + ".replace").c_str());
+	std::ofstream outfile((filename + ".replace").c_str());
 	if (!outfile)
 	{
 		std::cerr << "Error: cannot create output file" << std::endl;
-        return 1;
+		return 1;
 	}
-    std::string line;
+	std::string line;
 	while(std::getline(infile, line))
 	{
 		outfile << replaceLine(line, s1, s2);
 		if (!infile.eof())
 			outfile << std::endl;
 	}
-	infile.close();
+	infile.close(); 
 	outfile.close();
 	return 0;
 }
 
 //***std::ifstream inputfile(filename.c_str())***
 	// 1. c_str() converts a std::string into a C-style string (const char*)
-	// 2. ifstream means input file stream;It is a C++ class used to read data from a file
+	// 2. ifstream means input file stream; It is a C++ class used to read data from a file
 	// 3. infile is the object name
 //***std::ofstream outfile((filename + ".replace").c_str());***/
 	// 1. ofstream means output file stream; It is a C++ class used to write data to a file; 

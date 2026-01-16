@@ -36,31 +36,4 @@ void HarL::error(void)
 		<< std::endl;
 }
 
-void HarL::complain(std::string level)
-{
-	std::string levels[4] = 
-	{
-		"DEBUG",
-		"INFO",
-		"WARNING",
-		"ERROR"
-	};//an array of strings
-	void (HarL::*functions[4])(void) = 
-	{
-		&HarL::debug,
-		&HarL::info,
-		&HarL::warning,
-		&HarL::error
-	};//an array of 4 pointers to member functions of HarL that take no parameters and return void.
-	//void (*funcs[4])(int):array of 4 pointers to functions taking int and returning void
-	//create two parallel arrays used as a dispatch table
-	for (int i = 0; i < 4; i++)
-	{
-		if (levels[i] == level)
-		{
-			(this->*functions[i])();
-			return;
-		}
-	}
-}
 

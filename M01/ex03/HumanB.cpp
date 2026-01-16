@@ -1,25 +1,23 @@
 #include "HumanB.hpp"
 #include <iostream>
 
-HumanB::HumanB(const std::string& name)
-    : name(name), weapon(NULL)
-{
-}
+HumanB::HumanB(const std::string& name) : name(name), weapon(NULL){}
 
-//
+HumanB::~HumanB(){}
+//While HumanA takes the Weapon in its constructor, HumanB does not. So we need a function to setWeapon for HumanB
 void HumanB::setWeapon(Weapon& weapon)
 {
-    this->weapon = &weapon;//This line stores the address of an existing Weapon object inside the HumanB object. Take the address of an external Weapon reference and store it in a Weapon* pointer.
+	this->weapon = &weapon;
 }
 
 void HumanB::attack() const
 {
-    if (weapon)
-    {
-        std::cout << name << " attacks with their "
-                  << weapon->getType()
-                  << std::endl;
-    }
+	if (this->weapon)
+	{
+		std::cout << this->name << " attacks with their "
+					<< this->weapon->getType()
+					<< std::endl;
+	}
 }
 
 

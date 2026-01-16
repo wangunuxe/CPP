@@ -8,12 +8,13 @@
 class HumanB
 {
 private:
-    std::string name;
-    Weapon *weapon;
+	std::string name;
+	Weapon *weapon;//HumanB may not always have a weapon, it is possible that weapon == NULL
 public:
-    HumanB(const std::string& name);
-    void setWeapon(Weapon& weapon);
-    void attack() const;
+	HumanB(const std::string& name);
+	~HumanB();
+	void setWeapon(Weapon& weapon);
+	void attack() const;
 };
 
 

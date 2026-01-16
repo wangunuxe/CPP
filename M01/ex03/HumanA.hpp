@@ -4,14 +4,15 @@
 #include <string>
 #include "Weapon.hpp"
 
-class HumanA {
+class HumanA 
+{
 private:
-    std::string name;
-    Weapon& weapon;//weapon is a reference to an existing Weapon object 
-
+	std::string name;
+	Weapon& weapon;
 public:
-    HumanA(const std::string& name, Weapon& weapon);
-    void attack() const;
+	HumanA(const std::string& name, Weapon& weapon);
+	~HumanA();
+	void attack() const;
 };
 
 #endif

@@ -3,18 +3,17 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
 
 class HarL
 {
-private:
+public:
+	HarL();
+	~HarL();
 	void debug(void);
 	void info(void);
 	void warning(void);
 	void error(void);
-public:
-	HarL();
-	~HarL();
-	void complain(std::string level);
 };
 
 #endif
