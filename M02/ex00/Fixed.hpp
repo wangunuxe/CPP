@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jili <jili@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/17 13:10:56 by jili              #+#    #+#             */
+/*   Updated: 2026/01/17 15:22:54 by jili             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FIXED_HPP
 #define FIXED_HPP
 
@@ -7,7 +19,7 @@ class Fixed
 {
 private:
 	int					_rawBits;
-	static const int	_fractionalBits = 8;
+	static const int	_fractionalBits;
 
 public:
 	// Orthodox Canonical Form
