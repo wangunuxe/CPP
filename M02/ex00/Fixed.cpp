@@ -6,13 +6,13 @@
 /*   By: jili <jili@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 13:10:45 by jili              #+#    #+#             */
-/*   Updated: 2026/01/17 15:22:49 by jili             ###   ########.fr       */
+/*   Updated: 2026/01/17 16:45:21 by jili             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-const int	_fractionalBits = 8;
+const int	Fixed::_fractionalBits = 8;
 
 Fixed::Fixed() : _rawBits(0)
 {

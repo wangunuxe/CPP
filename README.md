@@ -66,7 +66,34 @@ M02/ex00:
     |----|----|----|----|----|----|----|----|
     1/2 1/4  1/8 1/16 1/32 1/64 1/128 1/256
 
+M02/ex00/Fixed.hpp
+***Fixed& operator=(const Fixed& other);***
+	**declare the copy assignment operator; This function is called when the = operator is used on this class.
+	**"operator=" the name of the function;
+	** "const Fixed& other": the paramater is the right-hand side of the assignment. "a = b"
+	**"Fixed&" : the return of the function
+
+*** The difference between COPY CONSTRUCTOR and COPY ASSIGNMENT:
+	** COPY CONSTRUCTOR is for "Cloning"
+		Fixed a;
+		Fixed b(a);
+		or
+		Fixed b = a;
+		*Fixed b does not exist yet, we use Fixed a to create b;
+		*Constructor : allocate + initialize
+	** COPY ASSIGNMENT is for "overwriting"
+		Fixed a;
+		Fixed b;
+		b = a;
+		*Fixed b already exists, we use Fixed a to overwrite b;
+		*assignment: reuse the existing memory
+
+*** The "const" at the end of "int  getRawBits(void) const" means :
+	This function will not modify the object(*this)
+
 ===== useful links =====
 https://github.com/mharriso/school21-checklists/blob/master/ng_4_cpp_module_00.pdf
 
 https://github.com/madebypixel02/CPP-Module-01
+
+https://42-cursus.gitbook.io/guide/4-rank-04/cpp-00-04-doing/cpp02

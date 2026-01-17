@@ -6,7 +6,7 @@
 /*   By: jili <jili@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 13:10:56 by jili              #+#    #+#             */
-/*   Updated: 2026/01/17 15:22:54 by jili             ###   ########.fr       */
+/*   Updated: 2026/01/17 16:33:16 by jili             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,3 @@ public:
 
 #endif
 
-// ***Fixed& operator=(const Fixed& other);***
-// 	**declare the copy assignment operator; This function is called when the = operator is used on this class.
-// 	**"operator=" the name of the function;
-// 	** "const Fixed& other": the paramater is the right-hand side of the assignment. "a = b"
-// 	**"Fixed&" : the return of the function
-
-// *** The difference between COPY CONSTRUCTOR and COPY ASSIGNMENT:
-// 	** COPY CONSTRUCTOR is for "Cloning"
-// 		Fixed a;
-// 		Fixed b(a);
-// 		or
-// 		Fixed b = a;
-// 		*Fixed b does not exist yet, we use Fixed a to create b;
-// 		*Constructor : allocate + initialize
-// 	** COPY ASSIGNMENT is for "overwriting"
-// 		Fixed a;
-// 		Fixed b;
-// 		b = a;
-// 		*Fixed b already exists, we use Fixed a to overwrite b;
-// 		*assignment: reuse the existing memory
-
-// *** The "const" at the end of "int  getRawBits(void) const" means :
-// 	This function will not modify the object(*this)
