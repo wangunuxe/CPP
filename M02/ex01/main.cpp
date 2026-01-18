@@ -3,19 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jili <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: jili <jili@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 13:11:24 by jili              #+#    #+#             */
-/*   Updated: 2026/01/17 13:11:25 by jili             ###   ########.fr       */
+/*   Updated: 2026/01/18 12:59:44 by jili             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//***It is about learning:***
-//1.how a class represents data internally
-//2.how constructors transform input
-//3. how copy / assignment really work
-//4. how C++ objects behave when passed, copied, printed
-//5. The Fixed class is just a pretext.
 
 # include "Fixed.hpp"
 

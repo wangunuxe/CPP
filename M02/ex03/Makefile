@@ -1,6 +1,6 @@
-NAME = EX02
+NAME = EX03
 
-SRCS = Fixed.cpp main.cpp
+SRCS = Fixed.cpp main.cpp Point.cpp bsp.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 CXX = c++

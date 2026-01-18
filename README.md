@@ -91,6 +91,50 @@ M02/ex00/Fixed.hpp
 *** The "const" at the end of "int  getRawBits(void) const" means :
 	This function will not modify the object(*this)
 
+M02/ex03/bsp.cpp
+*** cross product ***
+** In Three-dimensional space:
+In mathematics, the cross product is an operation defined for two vectors in three-dimensional space.
+Given two vectors a and b, the cross product is written as:
+	a × b
+The result is a new vector, which has three key meanings:
+	* Direction: The vector a × b is perpendicular (orthogonal) to both a and b.:
+			That means:if a and b lie in a plane,if a and b lie in a plane,
+	* Length
+	* Orientation
+** In Two-dimensional space:
+	We use cross product because its sign tells us the relative orientation of three points (left / right / aligned).
+
+	the cross product tells us:
+		positive → counter-clockwise → left side
+		negative → clockwise → right side
+		zero → collinear
+	This is called the orientation test.
+The code:
+(b - a) × (p - a)
+because:
+	a = (ax, ay)
+	b = (bx, by)
+	p = (px, py)
+get a vector (a direction)
+	b - a = (bx - ax, by - ay)
+	p - a = (px - ax, py - ay)
+
+because: for 2D vertors:
+	u = (ux, uy)
+	v = (vx, vy)
+The 2D cross product is defined as:
+	u × v = ux * vy - uy * vx
+
+so:
+	(b - a) × (p - a)
+	= (bx - ax) * (py - ay) - (by - ay) * (px - ax)
+
+"*" in this formula × does not mean multiplication like numbers.
+It means : Compare these two arrows and tell me how they turn relative to each other.
+
+
+
 ===== useful links =====
 https://github.com/mharriso/school21-checklists/blob/master/ng_4_cpp_module_00.pdf
 

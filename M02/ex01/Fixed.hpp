@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jili <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: jili <jili@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/17 13:11:33 by jili              #+#    #+#             */
-/*   Updated: 2026/01/17 13:11:36 by jili             ###   ########.fr       */
+/*   Updated: 2026/01/18 12:11:03 by jili             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class	Fixed
 {
 private:
 	int	_rawBits;
-	static const int	_fractionalBits = 8;// the "static" requires that that the number of fractional bits must be shared by all obejcts, not stores per object. A non-static variable must be initialized in the constructor initilizer list.
+	static const int	_fractionalBits;
 public:
 	Fixed();
 	Fixed(const int n);
