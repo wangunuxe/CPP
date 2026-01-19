@@ -11,7 +11,7 @@ static Fixed cross(Point const& a, Point const& b, Point const& p)
     return bx * py - by * px;
 }
 
-bool	bsp(Point const a, Point const b, Point const c, Point const point)
+bool	bsp(Point const a, Point const b, Point const c, Point const point)//all four parameters are passed by value, so the copy constructor is called behind the scenes
 {
 	Fixed ab = cross(a, b, point);
 	Fixed bc = cross(b, c, point);
@@ -22,11 +22,11 @@ bool	bsp(Point const a, Point const b, Point const c, Point const point)
 		return false;
 	//A point is inside a triangle if:It is on the SAME side of ALL THREE edges.
 	// Check if all results are positive
-	if (ab > 0 && bc > 0 && ca > 0)
+	else if (ab > Fixed(0) && bc > Fixed(0) && ca > Fixed(0))
 		return true;
 
 	// Check if all results are negative
-	if (ab < 0 && bc < 0 && ca < 0)
+	else if (ab < Fixed(0) && bc < Fixed(0) && ca < Fixed(0))
 		return true;
 
 	// Otherwise, the point is outside

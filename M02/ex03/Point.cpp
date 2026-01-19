@@ -3,11 +3,9 @@
 Point::Point() : x(0), y(0){}
 
 Point::Point(const float a, const float b) : x(a), y(b){}
+// const data member MUST be initialized in the constructor initializer list
+Point::Point(const Point& other): x(other.x), y(other.y) {}
 
-Point::Point(const Point& other)
-{
-	*this = other;
-}
 Point& Point::operator=(const Point& other)
 {
 	// the code is illegal, because x and y are const, C++ forbids assignment to const members.
