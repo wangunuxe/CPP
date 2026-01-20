@@ -1,21 +1,15 @@
 #include "ClapTrap.hpp"
+// constructors, copy assignment and destructor
 
-ClapTrap::ClapTrap()
+//initializer list and constructor body coexist
+ClapTrap::ClapTrap() : _Name("Default"), _HitPoints(10), _EnergyPoints(10), _AttackDamage(0)
 {
 	std::cout << "Default constructor called" << std::endl;
-	_Name = "Default";
-	_HitPoints = 10;
-	_EnergyPoints = 10;
-	_AttackDamage = 0;
 }
-
-ClapTrap::ClapTrap(std::string Name)
+//initializer list and parameter coexist
+ClapTrap::ClapTrap(std::string Name) : _Name(Name), _HitPoints(10), _EnergyPoints(10), _AttackDamage(0)
 {
-	std::cout << "Parameterized constructor called" << std::endl;
-	_Name = Name;
-	_HitPoints = 10;
-	_EnergyPoints = 10;
-	_AttackDamage = 0;
+	std::cout << "Parameterized  constructor called" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
@@ -42,16 +36,17 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 	return *this;
 }
 
+//member functions
 void	ClapTrap::attack(const std::string& target)
 {
-	if (this -> _HitPoints == 0)
+	if (this -> _HitPoints <= 0)
 	{
 		std::cout << "ClapTrap " << this->_Name
 					<< " can not attack because it has no hit points left."
 					<< std::endl;
 		return;
 	}
-	if (this -> _EnergyPoints == 0)
+	if (this -> _EnergyPoints <= 0)
 	{
 		std::cout << "ClapTrap " << this->_Name
 					<< " can not attack beacuse it has no energy points left."
@@ -66,7 +61,7 @@ void	ClapTrap::attack(const std::string& target)
 }
 void	ClapTrap::takeDamage(unsigned int amount)//When ClapTrap takes damage, it loses "amount" hits points
 {
-	if (this -> _HitPoints == 0)
+	if (this -> _HitPoints <= 0)
 	{
 		std::cout << "ClapTrap " << this->_Name
 					<< " can not take more damage beacuse it has no hit points left."
@@ -84,14 +79,14 @@ void	ClapTrap::takeDamage(unsigned int amount)//When ClapTrap takes damage, it l
 }
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (this -> _HitPoints == 0)
+	if (this -> _HitPoints <= 0)
 	{
 		std::cout << "ClapTrap " << this->_Name
 					<< " can not be repaired beacuse it has no hit points left."
 					<< std::endl;
 		return;
 	}
-	if (this -> _EnergyPoints == 0)
+	if (this -> _EnergyPoints <= 0)
 	{
 		std::cout << "ClapTrap " << this->_Name
 					<< " can not be repaired beacuse it has no energy points left."

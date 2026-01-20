@@ -5,7 +5,7 @@
 # include <string>
 # include <iostream>
 
-class ScavTrap : public ClapTrap // inherit from Claptrap
+class ScavTrap : virtual public ClapTrap // inherit from Claptrap
 {
 public://need to write constructors and destructor 
 	ScavTrap();

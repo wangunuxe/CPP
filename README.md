@@ -56,7 +56,7 @@ M01/ex05/HarL.cpp:
 	HarL::ptr(42) // x
 	(object.*ptr)(42)// correct, put the object.*ptr in brackets
 M02/ex00:
-*** Fixed-point number in mathematics:
+*** Fixed-point number in mathematics***
     Fixed-point number is a number with a decimal point. The position of the decimal point is fixed by the definition and by design.
     ** In programming, a fixed-point number is stored using an integer type.(The integer is the representation, not the number itself.)
         *stored_integer = real_value × scaling_factor
@@ -110,32 +110,51 @@ The result is a new vector, which has three key meanings:
 		negative → clockwise → right side
 		zero → collinear
 	This is called the orientation test.
-The code:
-(b - a) × (p - a)
-because:
-	a = (ax, ay)
-	b = (bx, by)
-	p = (px, py)
-get a vector (a direction)
-	b - a = (bx - ax, by - ay)
-	p - a = (px - ax, py - ay)
+				The code:
+				(b - a) × (p - a)
+				because:
+					a = (ax, ay)
+					b = (bx, by)
+					p = (px, py)
+				get a vector (a direction)
+					b - a = (bx - ax, by - ay)
+					p - a = (px - ax, py - ay)
 
-because: for 2D vertors:
-	u = (ux, uy)
-	v = (vx, vy)
-The 2D cross product is defined as:
-	u × v = ux * vy - uy * vx
+				because: for 2D vertors:
+					u = (ux, uy)
+					v = (vx, vy)
+				The 2D cross product is defined as:
+					u × v = ux * vy - uy * vx
 
-so:
-	(b - a) × (p - a)
-	= (bx - ax) * (py - ay) - (by - ay) * (px - ax)
+				so:
+					(b - a) × (p - a)
+					= (bx - ax) * (py - ay) - (by - ay) * (px - ax)
 
 "*" in this formula × does not mean multiplication like numbers.
 It means : Compare these two arrows and tell me how they turn relative to each other.
 
+M03/ex01/ScavTrap.cpp
+***Inheritance***
+
+			ScavTrap::ScavTrap() : _Name("Default"), _HitPoints(10), _EnergyPoints(10), _AttackDamage(0)
+			{
+				std::cout << "ClapTrap : Default constructor called" << std::endl;
+			} //fault!
+
+A derived class constructor initializer list can OBLY initialize: Its own member variables and Base classes;
+It can not initialize members that belong to the base class directly;
+
+***virtual***
+A virtual base class (ClapTrap) is contructed by the most-derived class(DiamondTrap) only;
+In this case, the following constructors of ScavTrap and FragTrap are ignored:
+				ScavTrap::ScavTrap() : ClapTrap("Default");
+				ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name);
+				FragTrap::FragTrap() : ClapTrap("Default");
+				FragTrap::FragTrap(std::string Name) : ClapTrap(Name)
 
 
 ===== useful links =====
+
 https://github.com/mharriso/school21-checklists/blob/master/ng_4_cpp_module_00.pdf
 
 https://github.com/madebypixel02/CPP-Module-01
