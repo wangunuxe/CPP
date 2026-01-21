@@ -9,7 +9,14 @@ Dog::Dog() : Animal("Dog")
 Dog::Dog(const Dog& other) : Animal(other)
 {
 	std::cout << "Dog : copy constructor called" << std::endl;
-	brain = new Brain()	
+	brain = new Brain(*other.brain);
+	// === "new Brain(...)" ===
+		// 1. Allocates raw memory large enough for a object Brain;
+		// 2. Get an address (a Brain*)
+		// 3. Call the constructor that matches his argument;
+		// 4. Return the adress;
+	// === "Brain(*other.brain)" ===
+		
 }
 
 Dog& Dog::operator=(const Dog& other)
