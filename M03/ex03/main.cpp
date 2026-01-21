@@ -37,6 +37,12 @@ int	main()
 	std::cout << "\n=== DiamondTrap whoAmI ===" << std::endl;
 	c.whoAmI();
 
+	std::cout << "\n=== DiamondTrap High Five ===" << std::endl;
+	c.highFivesGuys();
+
+	std::cout << "\n=== DiamondTrap guard Gate ===" << std::endl;
+	c.guardGate();
+
 	std::cout << "\n=== END OF PROGRAM ===" << std::endl;
 	return 0;
 }

@@ -67,7 +67,7 @@ int	main()
     g = i;
     g.attack("Copied Target");
 
-	std::cout << "\n=== ScavTrap High five ===" << std::endl;
+	std::cout << "\n=== FragTrap High five ===" << std::endl;
 	b.highFivesGuys();
 
 	std::cout << "\n=== ScavTrap Gate Keeper mode ===" << std::endl;

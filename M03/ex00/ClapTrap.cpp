@@ -49,7 +49,7 @@ void	ClapTrap::attack(const std::string& target)
 	if (this -> _EnergyPoints <= 0)
 	{
 		std::cout << "ClapTrap " << this->_Name
-					<< " can not attack beacuse it has no energy points left."
+					<< " can not attack because it has no energy points left."
 					<< std::endl;
 		return;
 	}	
@@ -64,10 +64,17 @@ void	ClapTrap::takeDamage(unsigned int amount)//When ClapTrap takes damage, it l
 	if (this -> _HitPoints <= 0)
 	{
 		std::cout << "ClapTrap " << this->_Name
-					<< " can not take more damage beacuse it has no hit points left."
+					<< " can not take more damage because it has no hit points left."
 					<< std::endl;
 		return;
 	}
+	if (this -> _EnergyPoints <= 0)
+	{
+		std::cout << "ClapTrap " << this->_Name
+					<< " can not take more damage because it has no energy points left."
+					<< std::endl;
+		return;
+	}		
 	if (amount >= this->_HitPoints) // The hit points must be postive, so _HitPoints must > amount
 		this->_HitPoints = 0;
 	else
@@ -82,14 +89,14 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	if (this -> _HitPoints <= 0)
 	{
 		std::cout << "ClapTrap " << this->_Name
-					<< " can not be repaired beacuse it has no hit points left."
+					<< " can not be repaired because it has no hit points left."
 					<< std::endl;
 		return;
 	}
 	if (this -> _EnergyPoints <= 0)
 	{
 		std::cout << "ClapTrap " << this->_Name
-					<< " can not be repaired beacuse it has no energy points left."
+					<< " can not be repaired because it has no energy points left."
 					<< std::endl;
 		return;
 	}
