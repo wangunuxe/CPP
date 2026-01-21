@@ -3,9 +3,12 @@
 
 # include "Animal.hpp"
 # include <iostream>
+# include "Brain.hpp"
 
 class Cat : public Animal
 {
+private:
+	Brain* brain;
 public:
 	Cat();
 	Cat(const Cat& other);
@@ -13,8 +16,6 @@ public:
 	virtual ~Cat();
 
 	virtual void makeSound() const;
-	// In fact, the virtuality is inherited. 
-	//I still write "virtual" before the destructor and the makeSound(), because i want to Make polymorphic behavior obvious
 };
 
 #endif

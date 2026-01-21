@@ -3,9 +3,12 @@
 
 # include "Animal.hpp"
 # include <iostream>
+# include "Brain.hpp"
 
 class Dog : public Animal
 {
+private:
+	Brain* brain;
 public:
 	Dog();
 	Dog(const Dog& other);
@@ -13,6 +16,9 @@ public:
 	virtual ~Dog();
 
 	virtual void makeSound() const;
+
+	//for tests
+	Brain* getBrain() const;
 };
 
 #endif
