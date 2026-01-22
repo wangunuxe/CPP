@@ -4,41 +4,51 @@
 
 int main()
 {
-	std::cout << "===== Animal and Cat =====" << std::endl;
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
+	std::cout << "===== Creating Animal array =====" << std::endl;
+	const int size = 10;
+	Animal* animals[size];
+	for (int i = 0; i < size / 2; i++)
+		animals[i] = new Cat();
 
-	delete meta;
-	delete j;
-	delete i;
-
-	std::cout << "\n===== WrongAnimal and WrongCat =====" << std::endl;
-	const WrongAnimal* beta = new WrongAnimal();
-	const WrongAnimal* c = new WrongCat();
-	std::cout << c->getType() << " " << std::endl;
-	c->makeSound(); 
-	beta->makeSound();
-
-	delete beta;
-	delete c;
-
-	std::cout << "\n===== more tests =====" << std::endl;
-
-	const Animal* animals[3];
-	animals[0] = new Animal();
-	animals[1] = new Cat();
-	animals[2] = new Dog();
-
-	for (int i = 0; i < 3; i++)
+	for (int i = size /2; i < 10; i++)
+		animals[i] = new Dog();
+	for (int i = 0; i < size; i++)
+	{
+		std::cout << "Animal[" << i << "] is type: " << animals[i]->getType() << std::endl;
 		animals[i]->makeSound();
-	for (int i = 0; i < 3; i++)
+	}
+	std::cout << "\n===== deleting Animal array =====" << std::endl;
+	for (int i = 0; i < size; i++)
 		delete animals[i];
-	std::cout << "\n===== end =====" << std::endl;
+
+	std::cout << "\n===== testing deep copy =====" << std::endl;
+	Dog original;
+	original.getBrain()->setIdea(0, "I am a good dog");
+	Dog copy = original;
+
+	std::cout << "\n      ===== first output =====      " << std::endl;
+	std::cout << "The idea of the original dog: " << original.getBrain()->getIdea(0) << std::endl;
+	std::cout << "The idea of the copy dog: " << copy.getBrain()->getIdea(0) << std::endl;
+
+	std::cout << "\n      ===== second output =====      " << std::endl;
+	original.getBrain()->setIdea(0, "I am a cute dog");	
+	std::cout << "The idea of the original dog: " << original.getBrain()->getIdea(0) << std::endl;
+	std::cout << "The idea of the copy dog: " << copy.getBrain()->getIdea(0) << std::endl;
+
+	std::cout << "\n===== testing deep copy for the lifetime of copy_object =====" << std::endl;
+
+	Dog original_1;
+	original_1.getBrain()->setIdea(0, "I am a good good dog");
+	{
+		std::cout << "\n      ===== in the scope =====      " << std::endl;	
+		Dog copy_1 = original_1;
+		std::cout << "The idea of the original_1 dog: " << original_1.getBrain()->getIdea(0) << std::endl;
+		std::cout << "The idea of the copy_1 dog: " << copy_1.getBrain()->getIdea(0) << std::endl;
+	}
+	std::cout << "\n      ===== outside of the scope =====      " << std::endl;
+	std::cout << "The idea of the original_1 dog: " << original_1.getBrain()->getIdea(0) << std::endl;
+	//std::cout << "The idea of the copy_1 dog: " << copy_1.getBrain()->getIdea(0) << std::endl;
+
+	std::cout << "\n===== end of programme =====" << std::endl;
 	return 0;
 }
