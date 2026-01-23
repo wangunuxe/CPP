@@ -151,8 +151,6 @@ In this case, the following constructors of ScavTrap and FragTrap are ignored:
 				ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name);
 				FragTrap::FragTrap() : ClapTrap("Default");
 				FragTrap::FragTrap(std::string Name) : ClapTrap(Name)
-
-
 ===== useful links =====
 
 https://github.com/mharriso/school21-checklists/blob/master/ng_4_cpp_module_00.pdf
@@ -160,3 +158,5 @@ https://github.com/mharriso/school21-checklists/blob/master/ng_4_cpp_module_00.p
 https://github.com/madebypixel02/CPP-Module-01
 
 https://42-cursus.gitbook.io/guide/4-rank-04/cpp-00-04-doing/cpp02
+
+https://gitlab.com/madebypixel02/CPP-Module-04/-/blob/main/ex03/Character.hpp?ref_type=heads
