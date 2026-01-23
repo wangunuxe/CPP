@@ -1,6 +1,6 @@
 # include "Cure.hpp"
 
-Cure::Cure() : AMateria("ice")
+Cure::Cure() : AMateria("cure")
 {
 	std::cout << "Cure : default constructor called" << std::endl;	
 }
@@ -26,7 +26,7 @@ Cure::~Cure()
 AMateria* Cure::clone() const
 {
 	AMateria* tmp;
-	tmp = new Cure();
+	tmp = new Cure(*this);// this is to clone based on the current object
 	return tmp;
 }
 

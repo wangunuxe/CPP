@@ -33,9 +33,8 @@ std::string const& AMateria::getType() const
 	return this->_type;
 }
 
-AMateria* AMateria::clone() const {}
-
 void AMateria::use(ICharacter& target)
 {
-	
+	(void)target;
+	//defaut behavior: do noting;
 }
