@@ -2,13 +2,13 @@
 
 Character::Character() : _name("Default") 
 {
-	std::cout << "Character : default constructor called" << std::endl;
+	// std::cout << "Character : default constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 		_inventory[i] = NULL;
 }
 Character::Character(const std::string& name) : _name(name)
 {
-	std::cout << "Character : Parameterized constructor called" << std::endl;
+	// std::cout << "Character : Parameterized constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 		_inventory[i] = NULL;
 }
@@ -16,7 +16,7 @@ Character::Character(const std::string& name) : _name(name)
 //deep copy
 Character::Character(const Character& other) : _name(other._name)
 {
-	std::cout << "Character : copy constructor called" << std::endl;
+	// std::cout << "Character : copy constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 	{
 		if(other._inventory[i])
@@ -29,7 +29,7 @@ Character::Character(const Character& other) : _name(other._name)
 
 Character& Character::operator=(const Character& other)
 {
-	std::cout << "Character : copy assignment called" << std::endl;
+	// std::cout << "Character : copy assignment called" << std::endl;
 	if (this != &other)
 	{
 		this->_name = other._name;
@@ -44,9 +44,7 @@ Character& Character::operator=(const Character& other)
 		for(int i = 0; i < 4; i++)
 		{
 			if(other._inventory[i])
-				this->_inventory[i] = other._inventory[i]->clone();// clone() use the "new"
-			else
-				this->_inventory[i] = NULL;			
+				this->_inventory[i] = other._inventory[i]->clone();// clone() use the "new"	
 		}
 	}
 	return *this;
@@ -54,7 +52,7 @@ Character& Character::operator=(const Character& other)
 //Requirement of subject: "Of course, the Materias must be deleted when a Character is destroyed.
 Character::~Character()
 {
-	std::cout << "Character : destructor called" << std::endl;
+	// std::cout << "Character : destructor called" << std::endl;
 	for(int i = 0; i < 4; i++)
 	{
 		delete _inventory[i];

@@ -2,6 +2,7 @@
 #define CHARACTER_HPP
 
 # include "AMateria.hpp"
+# include "ICharacter.hpp"
 
 class Character : public ICharacter
 {
@@ -23,7 +24,7 @@ private:
 	Character(const std::string& name);
 	Character(const Character& other);
 	Character& operator=(const Character& other);
-	virtual ~Character() {};
+	virtual ~Character();
 
 	//ICharacher interface
 	virtual std::string const & getName() const;

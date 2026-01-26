@@ -27,6 +27,7 @@ Cat& Cat::operator=(const Cat& other)
 Cat::~Cat()
 {
 	std::cout << "Cat : destructor called" << std::endl;
+	delete brain; //delete the brain before deleting the Cat;
 }
 
 void	Cat::makeSound() const

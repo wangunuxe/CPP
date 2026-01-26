@@ -13,7 +13,7 @@ public:
 	WrongAnimal(std::string _type);
 	WrongAnimal(const WrongAnimal& other);
 	WrongAnimal& operator=(const WrongAnimal& other);
-	virtual ~WrongAnimal();
+	~WrongAnimal();
 
 	std::string getType() const;
 

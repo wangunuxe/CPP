@@ -1,11 +1,10 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongCat.hpp"
 
 int main()
 {
 	std::cout << "===== Can not instantiate the Animal =====" << std::endl;
-	//Animal a();
+	//Animal a;
 
 	std::cout << "\n===== Creating Animal array =====" << std::endl;
 	const int size = 10;

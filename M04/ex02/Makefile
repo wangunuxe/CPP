@@ -1,6 +1,6 @@
-NAME = EX00
+NAME = EX02
 
-SRCS = A_Animal.cpp Cat.cpp Dog.cpp main.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
+SRCS = A_Animal.cpp Cat.cpp Dog.cpp main.cpp Brain.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 CXX=c++
