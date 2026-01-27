@@ -52,12 +52,14 @@ Character& Character::operator=(const Character& other)
 //Requirement of subject: "Of course, the Materias must be deleted when a Character is destroyed.
 Character::~Character()
 {
-	// std::cout << "Character : destructor called" << std::endl;
+	std::cout << "Character : destructor called" << std::endl;
 	for(int i = 0; i < 4; i++)
 	{
+		std::cout << "Character : inside of the scope of destructor " << std::endl;
 		delete _inventory[i];
 		_inventory[i] = NULL;
 	}
+	std::cout << "Character : outside of the scope of destructor " << std::endl;
 }
 
 std::string const& Character::getName() const

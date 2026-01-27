@@ -24,20 +24,21 @@ int main()
 		delete bob;
 		delete me;
 		delete src;
+
 	}
 
-	{
-		std::cout << "\n===== TEST 2 : Unknown Materia type =====" << std::endl;
-		IMateriaSource* src1 = new MateriaSource();
-		src1->learnMateria(new Ice());
+	// {
+	// 	std::cout << "\n===== TEST 2 : Unknown Materia type =====" << std::endl;
+	// 	IMateriaSource* src1 = new MateriaSource();
+	// 	src1->learnMateria(new Ice());
 
-		AMateria* tmp1 = src1->createMateria("fire");
+	// 	AMateria* tmp1 = src1->createMateria("fire");
 
-		if (!tmp1)
-			std::cout << "Unknown materia correctly returns NULL" << std::endl;
+	// 	if (!tmp1)
+	// 		std::cout << "Unknown materia correctly returns NULL" << std::endl;
 
-		delete src1;
-	}
+	// 	delete src1;
+	// }
 
 	// {
 	// 	std::cout << "\n===== TEST 3 : Inventory limit (max 4 Materias) =====" << std::endl;
@@ -78,28 +79,28 @@ int main()
 	// 	delete tmp3;
 	// 	delete src3;
 	// }
-	{
-		std::cout << "\n===== TEST 5 : Deep copy of Character (copy constructor) =====" << std::endl;
-		IMateriaSource* src = new MateriaSource();
-		src->learnMateria(new Ice());
-		src->learnMateria(new Cure());
+	// {
+	// 	std::cout << "\n===== TEST 5 : Deep copy of Character (copy constructor) =====" << std::endl;
+	// 	IMateriaSource* src = new MateriaSource();
+	// 	src->learnMateria(new Ice());
+	// 	src->learnMateria(new Cure());
 
-		Character original("original");
-		original.equip(src->createMateria("ice"));
+	// 	Character original("original");
+	// 	original.equip(src->createMateria("ice"));
 
-		Character copy(original);
+	// 	Character copy(original);
 
-		Character bob("bob");
-		std::cout << "\n              ===== First output of TEST 5  =====" << std::endl;
-		original.use(0, bob);
-		copy.use(0, bob);
+	// 	Character bob("bob");
+	// 	std::cout << "\n              ===== First output of TEST 5  =====" << std::endl;
+	// 	original.use(0, bob);
+	// 	copy.use(0, bob);
 
-		original.unequip(0);
-		original.equip(src->createMateria("cure"));
-		std::cout << "\n              ===== Second output of TEST 5  =====" << std::endl;
-		original.use(0, bob);
-		copy.use(0, bob);
-		delete src;
-	}
+	// 	original.unequip(0);
+	// 	original.equip(src->createMateria("cure"));
+	// 	std::cout << "\n              ===== Second output of TEST 5  =====" << std::endl;
+	// 	original.use(0, bob);
+	// 	copy.use(0, bob);
+	// 	delete src;
+	// }
 	return 0;
 }

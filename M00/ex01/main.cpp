@@ -12,8 +12,15 @@ int	main()
 	while (true)
 	{
 		std::cout << "Please enter ADD, SEARCH or EXIT: ";
+		
 		if (!std::getline(std::cin, command))
 			break;//Ctrl + D
+		//???
+		if (!std::getline(std::cin, command) && std::cin.eof())
+		{
+			std::cout << "Exiting whole program because of a ctrl+d." << std::endl;
+			return (0);
+		}
 
 		if (command == "ADD")
 			pb.addContact();
