@@ -17,7 +17,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 
 PmergeMe::~PmergeMe() {}
 
-// ── Input parsing ─────────────────────────────────────────────────────────────
+// ── Input parsing 
 
 void PmergeMe::parseInput(int argc, char **argv)
 {
@@ -41,15 +41,14 @@ void PmergeMe::parseInput(int argc, char **argv)
     }
 }
 
-// ── Jacobsthal sequence ───────────────────────────────────────────────────────
+// ── Jacobsthal sequence 
 //
 // Ford-Johnson uses Jacobsthal numbers to decide insertion order, minimising
 // the number of comparisons needed.
 // Sequence: 0, 1, 1, 3, 5, 11, 21, 43, 85, 171, ...
 // T(n) = T(n-1) + 2*T(n-2)
 //
-// We generate indices that cover [0, n) in Jacobsthal order so that binary
-// search bounds stay as tight as possible.
+// We generate indices that cover [0, n) in Jacobsthal order so that binary search bounds stay as tight as possible.
 
 std::vector<std::size_t> PmergeMe::jacobsthalOrder(std::size_t n) const
 {
@@ -90,7 +89,7 @@ std::vector<std::size_t> PmergeMe::jacobsthalOrder(std::size_t n) const
     return order;
 }
 
-// ── Vector implementation ─────────────────────────────────────────────────────
+// ── Vector implementation 
 
 // Binary-search insert `value` into the sorted prefix [0, bound) of `sorted`
 void PmergeMe::binaryInsert(std::vector<int> &sorted,
@@ -118,7 +117,7 @@ void PmergeMe::mergeInsertVec(std::vector<int> &seq)
     std::size_t n = seq.size();
     if (n <= 1) return;
 
-    // ── Step 1: Pair up elements, sort each pair so larger is first ───────────
+    // Step 1: Pair up elements, sort each pair so larger is first
     bool hasStraggler = (n % 2 != 0);
     int  straggler    = hasStraggler ? seq.back() : 0;
     if (hasStraggler) seq.pop_back();
@@ -134,19 +133,23 @@ void PmergeMe::mergeInsertVec(std::vector<int> &seq)
         paired[i] = (a >= b) ? std::make_pair(a, b) : std::make_pair(b, a);
     }
 
-    // ── Step 2: Recursively sort the "larger" (main) elements ────────────────
+    //  Step 2: Recursively sort the "larger" (main) elements ────────────────
     std::vector<int> main_chain;
     for (std::size_t i = 0; i < pairs; ++i)
         main_chain.push_back(paired[i].first);
 
     mergeInsertVec(main_chain); // recursive call
 
-    // ── Step 3: Build the pend list aligned to sorted main_chain ─────────────
+    // Step 3: Build the pend list aligned to sorted main_chain 
+
     // After recursion, main_chain is sorted.  We need to find, for each
     // main element, its corresponding pend (smaller) partner.
     //
     // Because recursion may have reordered main elements we must match them.
+    // aFor[i] records the "a" value originally paired with pend[i], so that
+    // later we can relocate it inside the (mutating) main_chain.
     std::vector<int> pend;
+    std::vector<int> aFor;
     {
         // Match each pend to its partner by value.
         // We use a temporary copy of paired and mark used entries.
@@ -158,6 +161,7 @@ void PmergeMe::mergeInsertVec(std::vector<int> &seq)
                 if (tmp[j].first == main_chain[i] && tmp[j].second != -1)
                 {
                     pend.push_back(tmp[j].second);
+                    aFor.push_back(tmp[j].first);
                     tmp[j].second = -1; // mark used
                     break;
                 }
@@ -165,7 +169,7 @@ void PmergeMe::mergeInsertVec(std::vector<int> &seq)
         }
     }
 
-    // ── Step 4: Insert pend elements using Jacobsthal order ──────────────────
+    // Step 4: Insert pend elements using Jacobsthal order 
     // The first pend element is guaranteed <= main_chain[0], insert at front
     if (!pend.empty())
     {
@@ -180,23 +184,25 @@ void PmergeMe::mergeInsertVec(std::vector<int> &seq)
                 std::size_t idx = order[k];
                 if (idx == 0) continue; // already inserted
 
-                // The corresponding main element is now at position (idx+1)
-                // in main_chain (shifted by the already-inserted pend[0]).
-                // Binary search is bounded to that position.
-                std::size_t bound = idx + 1; // upper bound for binary search
+                // Earlier insertions may have shifted the position of this
+                // pend's paired "a" value within main_chain, so we must
+                // locate it *now* rather than trust a static formula.
+                std::vector<int>::iterator pos =
+                    std::find(main_chain.begin(), main_chain.end(), aFor[idx]);
+                std::size_t bound = static_cast<std::size_t>(pos - main_chain.begin()) + 1;
                 binaryInsert(main_chain, pend[idx], bound);
             }
         }
     }
 
-    // ── Step 5: Insert straggler if odd count ─────────────────────────────────
+    // Step 5: Insert straggler if odd count 
     if (hasStraggler)
         binaryInsert(main_chain, straggler, main_chain.size());
 
     seq = main_chain;
 }
 
-// ── Deque implementation ──────────────────────────────────────────────────────
+// ── Deque implementation 
 
 void PmergeMe::binaryInsertDeq(std::deque<int> &sorted,
                                 int              value,
@@ -244,6 +250,7 @@ void PmergeMe::mergeInsertDeq(std::deque<int> &seq)
     mergeInsertDeq(main_chain);
 
     std::deque<int> pend;
+    std::vector<int> aFor;
     {
         std::vector<std::pair<int, int> > tmp = paired;
         for (std::size_t i = 0; i < main_chain.size(); ++i)
@@ -253,6 +260,7 @@ void PmergeMe::mergeInsertDeq(std::deque<int> &seq)
                 if (tmp[j].first == main_chain[i] && tmp[j].second != -1)
                 {
                     pend.push_back(tmp[j].second);
+                    aFor.push_back(tmp[j].first);
                     tmp[j].second = -1;
                     break;
                 }
@@ -273,7 +281,9 @@ void PmergeMe::mergeInsertDeq(std::deque<int> &seq)
                 std::size_t idx = order[k];
                 if (idx == 0) continue;
 
-                std::size_t bound = idx + 1;
+                std::deque<int>::iterator pos =
+                    std::find(main_chain.begin(), main_chain.end(), aFor[idx]);
+                std::size_t bound = static_cast<std::size_t>(pos - main_chain.begin()) + 1;
                 binaryInsertDeq(main_chain, pend[idx], bound);
             }
         }
@@ -285,7 +295,7 @@ void PmergeMe::mergeInsertDeq(std::deque<int> &seq)
     seq = main_chain;
 }
 
-// ── Public entry point ────────────────────────────────────────────────────────
+// ── Public entry point 
 
 void PmergeMe::run(int argc, char **argv)
 {
@@ -295,14 +305,14 @@ void PmergeMe::run(int argc, char **argv)
     std::cout << "Before: ";
     printContainer(_vec);
 
-    // ── Sort with std::vector and measure time ────────────────────────────────
+    // ── Sort with std::vector and measure time 
     std::clock_t startVec = std::clock();
     mergeInsertVec(_vec);
     std::clock_t endVec = std::clock();
     double timeVec = static_cast<double>(endVec - startVec)
                      / CLOCKS_PER_SEC * 1e6; // microseconds
 
-    // ── Sort with std::deque and measure time ─────────────────────────────────
+    // ── Sort with std::deque and measure time 
     std::clock_t startDeq = std::clock();
     mergeInsertDeq(_deq);
     std::clock_t endDeq = std::clock();

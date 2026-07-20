@@ -31,7 +31,7 @@ private:
     template <typename Container>
     void printContainer(const Container &c) const;
 
-    // ── Ford-Johnson for std::vector<int> ────────────────────────────────────
+    // ── Ford-Johnson for std::vector<int> 
 
     // Generate Jacobsthal insertion order indices
     // The sequence: 1, 3, 5, 11, 21, 43, 85, ... (T(n) = 2*T(n-2) + T(n-1))
@@ -44,7 +44,7 @@ private:
 
     void mergeInsertVec(std::vector<int> &seq);
 
-    // ── Ford-Johnson for std::deque<int> ─────────────────────────────────────
+    // ── Ford-Johnson for std::deque<int> 
 
     void binaryInsertDeq(std::deque<int> &sorted,
                          int value,

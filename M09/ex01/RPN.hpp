@@ -3,9 +3,10 @@
 
 #include <stack>
 #include <string>
-#include <iostream>
 #include <sstream>
+#include <iostream>
 #include <stdexcept>
+#include <cctype>
 
 class RPN
 {
@@ -15,12 +16,12 @@ public:
     RPN &operator=(const RPN &other);
     ~RPN();
 
-    // Evaluate an RPN expression string; throws on error
     int evaluate(const std::string &expression) const;
 
 private:
     bool isOperator(const std::string &token) const;
-    int  applyOperator(char op, int lhs, int rhs) const;
+    bool isSingleDigit(const std::string &token) const;
+    int  applyOperator(int a, int b, char op) const;
 };
 
 #endif

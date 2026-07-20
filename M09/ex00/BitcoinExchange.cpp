@@ -1,5 +1,5 @@
 #include "BitcoinExchange.hpp"
-#include <cstdlib>
+//OCF  Orthodox Canonical Form
 
 BitcoinExchange::BitcoinExchange() {}
 
@@ -14,7 +14,22 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 
 BitcoinExchange::~BitcoinExchange() {}
 
-// ── helpers ──────────────────────────────────────────────────────────────────
+// ── helpers 
+
+// Remove trailing '\r' or whitespace (handles CRLF-formatted input files)
+std::string BitcoinExchange::trimTrailing(const std::string &line) const
+{
+    std::string result = line;
+    while (!result.empty() &&
+           (result[result.size() - 1] == '\r' ||
+            result[result.size() - 1] == '\n' ||
+            result[result.size() - 1] == ' '  ||
+            result[result.size() - 1] == '\t'))
+    {
+        result.erase(result.size() - 1);
+    }
+    return result;
+}
 
 // Validate "YYYY-MM-DD" and check calendar ranges
 bool BitcoinExchange::isValidDate(const std::string &date) const
@@ -52,35 +67,35 @@ bool BitcoinExchange::isValidDate(const std::string &date) const
     return true;
 }
 
-// Parse value and validate range [0, 1000]
-bool BitcoinExchange::isValidValue(const std::string &valueStr, double &out) const
+// Parse value and classify the result. Does NOT print anything itself:
+// the caller decides which message fits, based on the returned status.
+BitcoinExchange::ValueStatus BitcoinExchange::parseValue(const std::string &valueStr, double &out) const
 {
+    if (valueStr.empty())
+        return VALUE_BAD_FORMAT;
+
     std::istringstream iss(valueStr);
     double val;
     if (!(iss >> val))
-        return false;
+        return VALUE_BAD_FORMAT;
 
     std::string leftover;
     if (iss >> leftover)
-        return false;   // trailing garbage
+        return VALUE_BAD_FORMAT;   // trailing garbage, e.g. "1.2.3" or "12abc"
 
     if (val < 0.0)
-    {
-        std::cerr << "Error: not a positive number." << std::endl;
-        return false;
-    }
+        return VALUE_NEGATIVE;
     if (val > 1000.0)
-    {
-        std::cerr << "Error: too large a number." << std::endl;
-        return false;
-    }
+        return VALUE_TOO_LARGE;
+
     out = val;
-    return true;
+    return VALUE_OK;
 }
 
 // Find closest date <= requested date using lower_bound
 double BitcoinExchange::getRate(const std::string &date) const
 {
+    // lower_bound 是 std::map 自带的一个成员函数 : 返回指向"第一个不小于 key 的元素"的迭代器
     std::map<std::string, double>::const_iterator it = _db.lower_bound(date);
 
     if (it == _db.end() || it->first != date)
@@ -93,8 +108,8 @@ double BitcoinExchange::getRate(const std::string &date) const
     return it->second;
 }
 
-// ── public interface ──────────────────────────────────────────────────────────
-
+// ── public interface 
+//读取 database（data.csv），建立查找表: 把文件内容搬进内存里的 _db 这个 map，方便之后快速查找
 void BitcoinExchange::loadDatabase(const std::string &filename)
 {
     std::ifstream file(filename.c_str());
@@ -106,6 +121,7 @@ void BitcoinExchange::loadDatabase(const std::string &filename)
 
     while (std::getline(file, line))
     {
+        line = trimTrailing(line);
         if (line.empty()) continue;
 
         std::size_t comma = line.find(',');
@@ -119,8 +135,10 @@ void BitcoinExchange::loadDatabase(const std::string &filename)
     }
 }
 
+// 读取 input.txt，逐行校验 + 查表 + 计算 + 输出
 void BitcoinExchange::processInput(const std::string &filename) const
 {
+    // read input
     std::ifstream file(filename.c_str());
     if (!file.is_open())
     {
@@ -133,6 +151,8 @@ void BitcoinExchange::processInput(const std::string &filename) const
 
     while (std::getline(file, line))
     {
+        // 逐行校验
+        line = trimTrailing(line);
         if (line.empty()) continue;
 
         // Expect format: "date | value"
@@ -153,12 +173,27 @@ void BitcoinExchange::processInput(const std::string &filename) const
         }
 
         double value = 0.0;
-        if (!isValidValue(valueStr, value))
-            continue;   // error message already printed
+        ValueStatus status = parseValue(valueStr, value);
 
+        if (status == VALUE_BAD_FORMAT)
+        {
+            std::cerr << "Error: bad input => " << line << std::endl;
+            continue;
+        }
+        if (status == VALUE_NEGATIVE)
+        {
+            std::cerr << "Error: not a positive number." << std::endl;
+            continue;
+        }
+        if (status == VALUE_TOO_LARGE)
+        {
+            std::cerr << "Error: too large a number." << std::endl;
+            continue;
+        }
+        // 
         try
         {
-            double rate   = getRate(date);
+            double rate   = getRate(date); //查表
             double result = value * rate;
             std::cout << date << " => " << value << " = " << result << std::endl;
         }
